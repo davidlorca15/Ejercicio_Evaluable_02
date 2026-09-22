@@ -16,7 +16,9 @@ public class Main {
             System.out.println("2. Ver tareas pendientes");
             System.out.println("3. Marcar tarea como completada");
             System.out.println("4. Eliminar tarea");
+            System.out.println("5. Filtrar por prioridad");
             System.out.println("0. Salir");
+
             try {
                 respuesta = sc.nextInt();
                 sc.nextLine();
@@ -33,6 +35,7 @@ public class Main {
                 case 2 -> verTareas();
                 case 3 -> completarTarea();
                 case 4 -> eliminarTarea();
+                case 5 -> filtrarTarea();
                 default -> System.out.println("Opción no válida.");
             }
         }
@@ -54,7 +57,7 @@ public class Main {
             prioridad = "alta";
         }else{
             System.out.println("Opción no válida");
-
+            return;
         }
 
         Tarea tarea = new Tarea(nombre, descripcion, "Pendiente", prioridad);
@@ -114,5 +117,27 @@ public class Main {
             System.out.println("Tarea fuera de los límites de la lista");
         }
 
+    }
+    public static void filtrarTarea() {
+        System.out.println("¿Por qué prioridad desea filtrar? (1, 2, 3): ");
+        String filtrar = sc.nextLine();
+
+        if (filtrar.equals("1")) {
+            filtrar = "baja";
+        } else if (filtrar.equals("2")) {
+            filtrar = "media";
+        } else if (filtrar.equals("3")) {
+            filtrar = "alta";
+        } else {
+            System.out.println("Opción no válida");
+            return;
+        }
+
+        for (Tarea tarea : tareas) {
+            if (tarea.getPrioridad().equals(filtrar)) {
+                System.out.println(tarea);
+                System.out.println();
+            }
+        }
     }
 }

@@ -34,6 +34,10 @@ public class Tarea {
         this.estado = estado;
     }
 
+    public String getPrioridad() {
+        return prioridad;
+    }
+
     @Override
     public String toString() {
         return "Nombre: " + nombre +
