@@ -9,6 +9,8 @@ Aplicación de gestión de tareas (estilo To-Do) por consola.
 - Marcar tareas como completadas.
 - Eliminar tareas de la lista.
 - Control de errores mediante excepciones.
+- Filtrar tareas por prioridad.
+- Guardar las tareas en un txt.
 
 ## Estructura
 
@@ -23,6 +25,9 @@ Representa una tarea con:
 
 *Decidí usar String en `Estado` por si en el futuro se añadiesen otros estados*
 
+### Clase Gestor
+- Guarda las tareas en un txt
+
 ## Excepciones utilizadas
 
 - `InputMismatchException`: cuando el usuario introduce un valor no numérico en el menú.
@@ -35,4 +40,5 @@ Representa una tarea con:
 2. Ver tareas pendientes
 3. Marcar tarea como completada
 4. Eliminar tarea
+5.Filtrar por prioridad
 0. Salir

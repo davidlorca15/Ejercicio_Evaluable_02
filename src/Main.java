@@ -3,13 +3,16 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
     private static ArrayList<Tarea> tareas = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
         int respuesta = -1;
 
-        while (respuesta != 0){
+        while (respuesta != 0) {
+
             System.out.println();
             System.out.println("Elige una opción");
             System.out.println("1. Añadir tarea");
@@ -29,7 +32,7 @@ public class Main {
 
             System.out.println();
 
-            switch (respuesta){
+            switch (respuesta) {
                 case 0 -> System.out.println("Saliendo del programa...");
                 case 1 -> anadirTarea();
                 case 2 -> verTareas();
@@ -41,85 +44,114 @@ public class Main {
         }
     }
 
-    public static void anadirTarea(){
-        System.out.printf("Introduce el nombre de la tarea: ");
+    public static void anadirTarea() {
+
+        System.out.print("Introduce el nombre de la tarea: ");
         String nombre = sc.nextLine();
-        System.out.printf("Introduce su descripción: ");
+
+        System.out.print("Introduce su descripción: ");
         String descripcion = sc.nextLine();
-        System.out.println("Introduce el nivel de prioridad (1 (baja),2 (Media),3 (Alta)): ");
+
+        System.out.println("Introduce el nivel de prioridad (1 (baja), 2 (Media), 3 (Alta)): ");
         String prioridad = sc.nextLine();
 
-        if (prioridad.equals("1")){
+        if (prioridad.equals("1")) {
             prioridad = "baja";
-        }else if (prioridad.equals("2")){
+        } else if (prioridad.equals("2")) {
             prioridad = "media";
-        }else if (prioridad.equals("3")){
+        } else if (prioridad.equals("3")) {
             prioridad = "alta";
-        }else{
+        } else {
             System.out.println("Opción no válida");
             return;
         }
 
         Tarea tarea = new Tarea(nombre, descripcion, "Pendiente", prioridad);
         tareas.add(tarea);
+
+        Gestor.guardarTareas(tareas);
     }
+
     public static void verTareas() {
+
         if (tareas.isEmpty()) {
-                System.out.println("No hay tareas.");
-                return;
-            }
+            System.out.println("No hay tareas.");
+            return;
+        }
 
         for (int i = 0; i < tareas.size(); i++) {
-            if (!tareas.get(i).getEstado().equalsIgnoreCase("Completado")){
+
+            if (!tareas.get(i).getEstado().equalsIgnoreCase("Completado")) {
+
                 System.out.println("========== TAREA " + (i + 1) + " ==========");
                 System.out.println(tareas.get(i));
                 System.out.println();
             }
         }
     }
-    public static void completarTarea(){
+
+    public static void completarTarea() {
+
         if (tareas.isEmpty()) {
             System.out.println("No hay tareas.");
             return;
         }
 
         System.out.println("Introduce la tarea que quieres completar (1-" + tareas.size() + ")");
+
         int completar = sc.nextInt() - 1;
         sc.nextLine();
 
         try {
-            if (tareas.get(completar).getEstado().equalsIgnoreCase("Completado")){
+
+            if (tareas.get(completar).getEstado().equalsIgnoreCase("Completado")) {
+
                 System.out.println("Esa tarea ya está completada");
+
             } else {
+
                 tareas.get(completar).setEstado("Completado");
+                Gestor.guardarTareas(tareas);
+
                 System.out.println("Tarea marcada correctamente.");
             }
-        } catch (IndexOutOfBoundsException e){
-            System.out.println("Tarea fuera de los límites de la lista");
 
+        } catch (IndexOutOfBoundsException e) {
+
+            System.out.println("Tarea fuera de los límites de la lista");
         }
     }
-    public static void eliminarTarea(){
+
+    public static void eliminarTarea() {
+
         if (tareas.isEmpty()) {
             System.out.println("No hay tareas.");
             return;
         }
 
         try {
+
             System.out.println("Introduce la tarea que quieres eliminar (1-" + tareas.size() + ")");
+
             int eliminar = sc.nextInt() - 1;
             sc.nextLine();
 
             tareas.remove(eliminar);
 
+            Gestor.guardarTareas(tareas);
+
             System.out.println("Tarea eliminada correctamente.");
-        } catch (IndexOutOfBoundsException e){
+
+        } catch (IndexOutOfBoundsException e) {
+
             System.out.println("Tarea fuera de los límites de la lista");
         }
-
     }
+
     public static void filtrarTarea() {
+
         System.out.println("¿Por qué prioridad desea filtrar? (1, 2, 3): ");
+
         String filtrar = sc.nextLine();
 
         if (filtrar.equals("1")) {
@@ -134,7 +166,9 @@ public class Main {
         }
 
         for (Tarea tarea : tareas) {
+
             if (tarea.getPrioridad().equals(filtrar)) {
+
                 System.out.println(tarea);
                 System.out.println();
             }
