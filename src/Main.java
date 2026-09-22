@@ -54,10 +54,10 @@ public class Main {
             prioridad = "alta";
         }else{
             System.out.println("Opción no válida");
-        }
-//djqijqwijdq
 
-        Tarea tarea = new Tarea(nombre, descripcion, "Pendiente");
+        }
+
+        Tarea tarea = new Tarea(nombre, descripcion, "Pendiente", prioridad);
         tareas.add(tarea);
     }
     public static void verTareas() {
