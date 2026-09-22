@@ -43,15 +43,27 @@ public class Main {
         String nombre = sc.nextLine();
         System.out.printf("Introduce su descripción: ");
         String descripcion = sc.nextLine();
+        System.out.println("Introduce el nivel de prioridad (1 (baja),2 (Media),3 (Alta)): ");
+        String prioridad = sc.nextLine();
+
+        if (prioridad.equals("1")){
+            prioridad = "baja";
+        }else if (prioridad.equals("2")){
+            prioridad = "media";
+        }else if (prioridad.equals("3")){
+            prioridad = "alta";
+        }else{
+            System.out.println("Opción no válida");
+        }
 
         Tarea tarea = new Tarea(nombre, descripcion, "Pendiente");
         tareas.add(tarea);
     }
     public static void verTareas() {
         if (tareas.isEmpty()) {
-            System.out.println("No hay tareas.");
-            return;
-        }
+                System.out.println("No hay tareas.");
+                return;
+            }
 
         for (int i = 0; i < tareas.size(); i++) {
             if (!tareas.get(i).getEstado().equalsIgnoreCase("Completado")){
